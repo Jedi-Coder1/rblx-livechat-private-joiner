@@ -14,8 +14,8 @@ def getDetails(drivwr, id) -> tuple:
     message = content.find_element(By.ID, "message").get_attribute("innerHTML")
     # Get Author
     authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
-    author = authorchip.find_element(By.ID, "author-name").get_attribute("innerHTML")
-    return (author, message)
+    author = authorchip.find_element(By.ID, "author-name")
+    return (author.text, message)
 
 def mainFunc():
     driver = webdriver.Chrome()
