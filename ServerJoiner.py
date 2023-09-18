@@ -8,7 +8,14 @@ from selenium_stealth import stealth
 video_id = ""
 
 def getDetails(drivwr, id) -> tuple:
-    drivwr.find_element(By.ID, id)
+    container = drivwr.find_element(By.ID, id)
+    # Get Message
+    content = container.find_element(By.ID, "content")
+    message = content.find_element(By.ID, "message").get_attribute("innerHTML")
+    # Get Author
+    authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
+    author = authorchip.find_element(By.ID, "author-name").get_attribute("innerHTML")
+    return (author, message)
 
 def mainFunc():
     driver = webdriver.Chrome()
@@ -31,8 +38,8 @@ def mainFunc():
         if mydivs[-1]["id"] == latest_id: pass
         else:
             latest_id = mydivs[-1]["id"]
-            print(mydivs[-1]["id"])
             author, msg = getDetails(driver, mydivs[-1]["id"])
+            print(f"{author} said: {msg}")
         
         
 
