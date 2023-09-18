@@ -3,8 +3,12 @@ from selenium import webdriver
 import re
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
+from selenium.webdriver import ChromeOptions
+from selenium.common.exceptions import NoSuchWindowException
 from selenium_stealth import stealth
 
+options = ChromeOptions()
+#options.add_argument("-headless")
 video_id = ""
 
 def getDetails(drivwr, id) -> tuple:
@@ -18,7 +22,7 @@ def getDetails(drivwr, id) -> tuple:
     return (author.text, message)
 
 def mainFunc():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=options)
     stealth(driver,
             languages=["en-US", "en"],
             vendor="Google Inc.",
@@ -39,8 +43,9 @@ def mainFunc():
         else:
             latest_id = mydivs[-1]["id"]
             author, msg = getDetails(driver, mydivs[-1]["id"])
-            print(f"{author} said: {msg}")
-        
+            print(f"{author.encode('utf-8')} said: {msg.encode('utf-8')}")
+
+
 try:
      mainFunc()
 except NoSuchWindowException:
