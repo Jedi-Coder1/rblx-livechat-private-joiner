@@ -19,9 +19,9 @@ def mainFunc():
 
     url = f"https://www.youtube.com/live_chat?v={video_id}"
     driver.get(url)
-    html = driver.page_source
-    soup = BeautifulSoup(html, features="lxml")
-    mydivs = soup.find_all("div", {"class": "style-scope yt-live-chat-item-list-renderer"})
-    print(mydivs)
+    while True:
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
+        print(mydivs[-1].encode("utf-8"))
 
 mainFunc()
