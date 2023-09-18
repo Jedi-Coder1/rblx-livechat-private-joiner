@@ -2,12 +2,13 @@ from selenium import webdriver
 
 import re
 from bs4 import BeautifulSoup
+from selenium.webdriver.common.by import By
 from selenium_stealth import stealth
 
 video_id = ""
 
 def getDetails(drivwr, id) -> tuple:
-    drivwr
+    drivwr.find_element(By.ID, id)
 
 def mainFunc():
     driver = webdriver.Chrome()
