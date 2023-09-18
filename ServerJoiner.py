@@ -4,10 +4,11 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from selenium_stealth import stealth
 
+chrome_options = Options()
 video_id = ""
 
 def mainFunc():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=chrome_options)
     stealth(driver,
             languages=["en-US", "en"],
             vendor="Google Inc.",
@@ -19,9 +20,16 @@ def mainFunc():
 
     url = f"https://www.youtube.com/live_chat?v={video_id}"
     driver.get(url)
+    latest_id = None
     while True:
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
-        print(mydivs[-1].encode("utf-8"))
+        if mydivs[-1]["id"] == latest_id: pass
+        else:
+            print(mydivs[-1]["id"])
+            latest_id = mydivs[-1]["id"]
+        
+        
+        
 
 mainFunc()
