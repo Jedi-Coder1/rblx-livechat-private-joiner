@@ -9,9 +9,9 @@ from selenium_stealth import stealth
 
 options = ChromeOptions()
 #options.add_argument("-headless")
-video_id = ""
+video_id = "lP26UCnoH9s"
 
-def getDetails(drivwr, id) -> tuple:
+def getDetails(drivwr: webdriver.Chrome, id) -> tuple:
     container = drivwr.find_element(By.ID, id)
     # Get Message
     content = container.find_element(By.ID, "content")
@@ -19,7 +19,7 @@ def getDetails(drivwr, id) -> tuple:
     # Get Author
     authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
     author = authorchip.find_element(By.ID, "author-name")
-    return (author.text, message)
+    return (author.text.encode('ascii', 'ignore'), message.encode('ascii', 'ignore'))
 
 def mainFunc():
     driver = webdriver.Chrome(options=options)
@@ -43,7 +43,7 @@ def mainFunc():
         else:
             latest_id = mydivs[-1]["id"]
             author, msg = getDetails(driver, mydivs[-1]["id"])
-            print(f"{author.encode('utf-8')} said: {msg.encode('utf-8')}")
+            print(f"{author.decode()} said: {msg.decode()}")
 
 
 try:
