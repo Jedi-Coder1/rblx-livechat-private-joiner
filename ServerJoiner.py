@@ -1,14 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 from bs4 import BeautifulSoup
 from selenium_stealth import stealth
 
-chrome_options = Options()
 video_id = ""
 
 def mainFunc():
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome()
     stealth(driver,
             languages=["en-US", "en"],
             vendor="Google Inc.",
