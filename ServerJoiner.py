@@ -41,6 +41,7 @@ def mainFunc():
             author, msg = getDetails(driver, mydivs[-1]["id"])
             print(f"{author} said: {msg}")
         
-        
-
-mainFunc()
+try:
+     mainFunc()
+except NoSuchWindowException:
+    raise SystemExit("Browser Closed")
