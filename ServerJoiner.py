@@ -36,14 +36,17 @@ def mainFunc():
     driver.get(url)
     latest_id = None
     
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
-    if mydivs[-1]["id"] == latest_id: pass
-    else:
-        latest_id = mydivs[-1]["id"]
-        return getDetails(driver, mydivs[-1]["id"])
+    while True:
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
+        if mydivs[-1]["id"] == latest_id: pass
+        else:
+            latest_id = mydivs[-1]["id"]
+            author, msg = getDetails(driver, mydivs[-1]["id"])
+            print(f"{author.decode()} said: {msg.decode()}")
+
 
 try:
-  mainFunc()
+     mainFunc()
 except NoSuchWindowException:
-  raise SystemExit("Browser Closed")
+    raise SystemExit("Browser Closed")
