@@ -9,17 +9,17 @@ from selenium_stealth import stealth
 
 options = ChromeOptions()
 #options.add_argument("-headless")
-video_id = "lP26UCnoH9s"
+video_id = ""
 
-def getDetails(drivwr: webdriver.Chrome, id) -> tuple:
+def getDetails(drivwr, id) -> tuple:
     container = drivwr.find_element(By.ID, id)
     # Get Message
     content = container.find_element(By.ID, "content")
-    message = content.find_element(By.ID, "message").get_attribute("innerHTML")
+    message = content.find_element(By.ID, "message")
     # Get Author
     authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
     author = authorchip.find_element(By.ID, "author-name")
-    return (author.text.encode('ascii', 'ignore'), message.encode('ascii', 'ignore'))
+    return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
 
 def mainFunc():
     driver = webdriver.Chrome(options=options)
