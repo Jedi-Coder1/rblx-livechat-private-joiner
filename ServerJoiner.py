@@ -32,7 +32,7 @@ def mainFunc():
             fix_hairline=True,
             )
 
-    url = f"https://www.youtube.com/live_chat?v={video_id}"
+    url = "https://www.youtube.com/live_chat?v=" + video_id
     driver.get(url)
     latest_id = None
     
