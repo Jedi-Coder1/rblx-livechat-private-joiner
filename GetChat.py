@@ -1,10 +1,8 @@
 from selenium import webdriver
 
-import re
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
-from selenium.common.exceptions import NoSuchWindowException
 from selenium_stealth import stealth
 
 options = ChromeOptions()
