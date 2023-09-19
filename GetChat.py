@@ -1,8 +1,10 @@
 from selenium import webdriver
 
+import re
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
+from selenium.common.exceptions import NoSuchWindowException
 from selenium_stealth import stealth
 
 options = ChromeOptions()
@@ -34,9 +36,9 @@ def mainFunc():
     driver.get(url)
     latest_id = None
     
-      soup = BeautifulSoup(driver.page_source, 'html.parser')
-      mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
-      if mydivs[-1]["id"] == latest_id: pass
-      else:
-          latest_id = mydivs[-1]["id"]
-          return getDetails(driver, mydivs[-1]["id"])
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
+    if mydivs[-1]["id"] == latest_id: pass
+    else:
+        latest_id = mydivs[-1]["id"]
+        return getDetails(driver, mydivs[-1]["id"])
