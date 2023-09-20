@@ -37,7 +37,7 @@ def mainFunc():
     latest_id = None
     
     while True:
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, features='lxml')
         mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
         if mydivs[-1]["id"] == latest_id: pass
         else:
