@@ -9,7 +9,7 @@ from selenium_stealth import stealth
 
 options = ChromeOptions()
 #options.add_argument("-headless")
-video_id = "dG3Ul7OwF_s"
+video_id = ""
 
 def getDetails(drivwr, id) -> tuple:
     container = drivwr.find_element(By.ID, id)
