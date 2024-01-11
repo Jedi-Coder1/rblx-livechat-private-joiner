@@ -1,2 +1,4 @@
 requests==2.28.2
-pytchat==0.5.5
+selenium==4.15.2
+selenium-stealth==1.0.6
+beautifulsoup4==4.12.2

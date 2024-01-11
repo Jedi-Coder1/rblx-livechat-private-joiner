@@ -1,4 +1,4 @@
-import pytchat, re, requests
+import re, requests
 channel_url = 'Enter Channel Url Here'
 
 def GetLastestStreamId():
@@ -25,17 +25,7 @@ def start():
         if Vid_Id == None:
             print('No Video Id')
         else:
-            chat = pytchat.create(Vid_Id)
-            while chat.is_alive():
-                    for c in chat.get().sync_items():
-                        author= c.author.name.encode("ascii", "ignore").decode()
-                        msg = c.message.encode("ascii", "ignore").decode()
-                        print("Given text contains some URL")
-                        URL = re.search("(?P<url>https?://[^\s]+)", msg).group("url")
-                        if 'https://www.roblox.com/' in URL:
-                            print('Joining Game')
-                        else:
-                            print(f'{author}: {msg}')
+            print()
     else:
         print('Channel Is Not Live')
         start()
