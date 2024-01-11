@@ -25,7 +25,7 @@ def start():
         if Vid_Id == None:
             print('No Video Id')
         else:
-            print()
+            pass
     else:
         print('Channel Is Not Live')
         start()

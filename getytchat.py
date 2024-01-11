@@ -7,7 +7,8 @@ from selenium_stealth import stealth
 
 options = ChromeOptions()
 options.add_argument("-headless")
-video_id = ""
+
+class ytchat
 
 def getDetails(drivwr, id) -> tuple:
     container = drivwr.find_element(By.ID, id)
@@ -19,7 +20,7 @@ def getDetails(drivwr, id) -> tuple:
     author = authorchip.find_element(By.ID, "author-name")
     return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
 
-def mainFunc():
+def StartChatRead(video_id):
     driver = webdriver.Chrome(options=options)
     stealth(driver,
             languages=["en-US", "en"],
@@ -40,11 +41,4 @@ def mainFunc():
         if mydivs[-1]["id"] == latest_id: pass
         else:
             latest_id = mydivs[-1]["id"]
-            author, msg = getDetails(driver, mydivs[-1]["id"])
-            print(f"{author.decode()} said: {msg.decode()}")
-
-
-try:
-     mainFunc()
-except NoSuchWindowException:
-    raise SystemExit("Browser Closed")
+            yield getDetails(driver, mydivs[-1]["id"])
