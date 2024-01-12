@@ -1,6 +1,8 @@
 from getytchat import ytchat
 
-chat = ytchat("jfKfPfyJRdk")
+chat = ytchat("")
 while True:
-    author, msg = chat.NextChat()
-    print(f"{author} said: {msg}")
+    nextC = chat.NextChat()
+    if nextC:
+        author, msg = nextC
+        print(f"{author} said: {msg}")
