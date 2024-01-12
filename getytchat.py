@@ -9,24 +9,27 @@ options.add_argument("-headless")
 
 class ytchat():
     def __init__(self, video_id: str) -> None:
-        print("Opening Webdriver")
-        self.driver = webdriver.Chrome(options=options)
-        self.url = "https://www.youtube.com/live_chat?v=" + video_id
-        stealth(self.driver,
-                languages=["en-US", "en"],
-                vendor="Google Inc.",
-                platform="Win32",
-                webgl_vendor="Intel Inc.",
-                renderer="Intel Iris OpenGL Engine",
-                fix_hairline=True,
-                )
-        self.latest_id = None
-        print("get live chat webpage")
-        self.driver.get(self.url)
-        # check if video id is valid
-        if "Chat is disabled" in self.driver.page_source:
-            raise SystemExit("Invalid Video ID")
-        else: pass
+        if video_id:
+            print("Opening Webdriver")
+            self.driver = webdriver.Chrome(options=options)
+            self.url = "https://www.youtube.com/live_chat?v=" + video_id
+            stealth(self.driver,
+                    languages=["en-US", "en"],
+                    vendor="Google Inc.",
+                    platform="Win32",
+                    webgl_vendor="Intel Inc.",
+                    renderer="Intel Iris OpenGL Engine",
+                    fix_hairline=True,
+                    )
+            self.latest_id = None
+            print("get live chat webpage")
+            self.driver.get(self.url)
+            # check if video id is valid
+            if "Chat is disabled" in self.driver.page_source:
+                raise SystemExit("Invalid Video ID")
+            else: pass
+        else:
+            raise SystemExit("No Video ID")
 
     def getDetails(self, id: str) -> tuple:
         container = self.driver.find_element(By.ID, id)
