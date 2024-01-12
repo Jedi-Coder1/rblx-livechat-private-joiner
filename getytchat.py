@@ -9,6 +9,7 @@ options.add_argument("-headless")
 
 class ytchat():
     def __init__(self, video_id: str) -> None:
+        print("Opening Webdriver")
         self.driver = webdriver.Chrome(options=options)
         self.url = "https://www.youtube.com/live_chat?v=" + video_id
         stealth(self.driver,
@@ -20,6 +21,7 @@ class ytchat():
                 fix_hairline=True,
                 )
         self.latest_id = None
+        print("get live chat webpage")
         self.driver.get(self.url)
         # check if video id is valid
         if "Chat is disabled" in self.driver.page_source:
@@ -34,7 +36,7 @@ class ytchat():
         # Get Author
         authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
         author = authorchip.find_element(By.ID, "author-name")
-        return (author.text.encode('ascii', 'ignore').decode(), message.text.encode('ascii', 'ignore').decode())
+        return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
 
     def NextChat(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')

@@ -6,7 +6,7 @@ while True:
     nextC = chat.NextChat()
     if nextC:
         author, msg = nextC
-        URL = re.search(r"https:\/\/www.roblox\.com\/share.code=[a-z0-9-]+&type=Server", msg)
+        URL = re.search(r"https:\/\/www.roblox\.com\/share.code=[a-z0-9-]+&type=Server", msg.decode())
         if URL:
             print(URL.group())
         else:
