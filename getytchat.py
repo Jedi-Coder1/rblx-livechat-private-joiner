@@ -39,8 +39,9 @@ class ytchat():
     def NextChat(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
         mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
-        if mydivs[-1]["id"] == self.latest_id:
+        divId = mydivs[-1]["id"]
+        if divId == self.latest_id:
             return None
         else:
-            self.latest_id = mydivs[-1]["id"]
-            return self.getDetails(mydivs[-1]["id"])
+            self.latest_id = divId
+            return self.getDetails(divId)
