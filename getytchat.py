@@ -34,7 +34,7 @@ class ytchat():
         # Get Author
         authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
         author = authorchip.find_element(By.ID, "author-name")
-        return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
+        return (author.text.encode('ascii', 'ignore').decode("utf-8"), message.text.encode('ascii', 'ignore').decode("utf-8"))
 
     def NextChat(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
