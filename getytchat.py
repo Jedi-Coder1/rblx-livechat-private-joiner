@@ -28,7 +28,7 @@ class ytchat():
             raise SystemExit("Invalid Video ID")
         else: pass
 
-    def getDetails(self, id) -> tuple:
+    def getDetails(self, id: str) -> tuple:
         container = self.driver.find_element(By.ID, id)
         # Get Message
         content = container.find_element(By.ID, "content")
@@ -41,7 +41,7 @@ class ytchat():
     def NextChat(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
         mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
-        divId = mydivs[-1]["id"]
+        divId = str(mydivs[-1]["id"])
         if divId == self.latest_id:
             return None
         else:
