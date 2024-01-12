@@ -2,7 +2,6 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
-from selenium.common.exceptions import NoSuchWindowException
 from selenium_stealth import stealth
 
 options = ChromeOptions()
@@ -23,7 +22,8 @@ class ytchat():
         self.latest_id = None
         self.driver.get(self.url)
         # check if video id is valid
-        if "Chat is disabled" in self.driver.page_source: return "Invalid Video ID"
+        if "Chat is disabled" in self.driver.page_source:
+            raise SystemExit("Invalid Video ID")
         else: pass
 
     def getDetails(self, id) -> tuple:
