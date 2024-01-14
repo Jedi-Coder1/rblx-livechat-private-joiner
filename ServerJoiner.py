@@ -1,4 +1,4 @@
-import re
+import re, os
 from getytchat import ytchat
 
 chat = ytchat("")
@@ -9,6 +9,6 @@ while True:
         regex = re.search(r"https:\/\/www.roblox\.com\/share.code=[a-z0-9-]+&type=Server", msg.decode())
         if regex:
             URL = regex.group()
-            print(URL)
+            os.startfile(URL)
         else:
             print(f"{author} said: {msg}")
