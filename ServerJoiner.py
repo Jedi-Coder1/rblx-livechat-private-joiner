@@ -1,7 +1,7 @@
 import re, os
 from getytchat import ytchat
 
-chat = ytchat("https://www.youtube.com/watch?v=jfKfPfyJRdk")
+chat = ytchat("")
 while True:
     nextC = chat.NextChat()
     if nextC:
