@@ -31,16 +31,6 @@ class ytchat():
         else:
             raise SystemExit("No Video ID")
 
-    def getDetails(self, id: str) -> tuple:
-        container = self.driver.find_element(By.ID, id)
-        # Get Message
-        content = container.find_element(By.ID, "content")
-        message = content.find_element(By.ID, "message")
-        # Get Author
-        authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
-        author = authorchip.find_element(By.ID, "author-name")
-        return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
-
     def NextChat(self):
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
         mydivs = soup.find_all("yt-live-chat-text-message-renderer", {"class": "style-scope yt-live-chat-item-list-renderer"})
@@ -49,4 +39,11 @@ class ytchat():
             return None
         else:
             self.latest_id = divId
-            return self.getDetails(divId)
+            container = self.driver.find_element(By.ID, divId)
+            # Get Message
+            content = container.find_element(By.ID, "content")
+            message = content.find_element(By.ID, "message")
+            # Get Author
+            authorchip = container.find_element(By.CSS_SELECTOR, "yt-live-chat-author-chip")
+            author = authorchip.find_element(By.ID, "author-name")
+            return (author.text.encode('ascii', 'ignore'), message.text.encode('ascii', 'ignore'))
