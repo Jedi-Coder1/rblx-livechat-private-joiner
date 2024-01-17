@@ -1,7 +1,7 @@
 import re, ctypes
 from getytchat import ytchat
 
-chat = ytchat("jfKfPfyJRdk")
+chat = ytchat("")
 while True:
     nextC = chat.NextChat()
     if nextC:
