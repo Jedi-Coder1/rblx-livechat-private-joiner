@@ -2,14 +2,30 @@ import re, ctypes
 from getytchat import ytchat
 
 chat = ytchat("")
-while True:
-    nextC = chat.NextChat()
-    if nextC:
-        author, msg = nextC
-        regex = re.search(r"https:\/\/www.roblox\.com\/share.code=[a-z0-9-]+&type=Server", msg.decode())
-        if regex:
-            URL = regex.group()
-            a = ctypes.cdll.LoadLibrary('Launcher.dll')
-            a.launch(URL)
+class ServerJoiner():
+    def __init__(self) -> None:
+        self.isFound = False
+        while True:
+            nextC = chat.NextChat()
+            if nextC:
+                author, msg = nextC
+                regex = self.hasRegex(msg.decode())
+                if regex:
+                    self.isFound = True
+                    URL = regex.group()
+                    a = ctypes.cdll.LoadLibrary('Launcher.dll')
+                    a.launch(URL)
+                else:
+                    print(f"{author} said: {msg}")
+    
+    def hasRegex(self, string):
+        if self.isFound:
+            print("Not Gonna Try Joining A Private Server Twice")
         else:
-            print(f"{author} said: {msg}")
+            regex = re.search(r"https:\/\/www.roblox\.com\/share.code=[a-z0-9-]+&type=Server", string)
+            if regex:
+                self.isFound = True
+                return regex
+            else: return False
+
+s=ServerJoiner()
